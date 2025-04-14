@@ -25,7 +25,7 @@ public class AccountManager {
 	    String bname = BankingSystemMain.scan.nextLine();
 	    System.out.print("잔고: ");
 	    int balance = BankingSystemMain.scan.nextInt();
-	    System.out.print("이자율: ");
+	    System.out.print("이자율(정수로 입력하세요): ");
 	    int interest = BankingSystemMain.scan.nextInt();
 	    BankingSystemMain.scan.nextLine();
 	    if (kind == 1) {
