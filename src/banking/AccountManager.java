@@ -14,6 +14,7 @@ public class AccountManager {
 	//계좌개설정보 입력
 	public void makeAccount() {
 	    System.out.println("***신규계좌개설***");
+	    System.out.println("-----계좌선택-----");
 	    System.out.println("1.보통계좌");
 	    System.out.println("2.신용신뢰계좌");
 	    int kind = BankingSystemMain.scan.nextInt();
