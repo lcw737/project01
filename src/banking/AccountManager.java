@@ -51,13 +51,13 @@ public class AccountManager {
 		        int interest = 0;
 
 		    if (account[i] instanceof HighCreditAccount) {
-		    	HighCreditAccount acc = (HighCreditAccount) account[i];
-		        interest = acc.balance * acc.interest / 100;
-		        interest += acc.balance * acc.ExtraInterest() / 100;
+		    	HighCreditAccount pm = (HighCreditAccount) account[i];
+		        interest = pm.balance * pm.interest / 100;
+		        interest += pm.balance * pm.ExtraInterest() / 100;
 		    } 
 		    else if (account[i] instanceof NormalAccount) {
-		    	NormalAccount acc = (NormalAccount) account[i];
-		    	interest = acc.balance * acc.interest / 100;
+		    	NormalAccount pm = (NormalAccount) account[i];
+		    	interest = pm.balance * pm.interest / 100;
 		    }
 		    account[i].balance += interest + pMoney;
 		    System.out.println("입금이 완료되었습니다.");
