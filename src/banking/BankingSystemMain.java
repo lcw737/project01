@@ -1,5 +1,6 @@
 package banking;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BankingSystemMain implements ICustomDefine {
@@ -12,38 +13,49 @@ public class BankingSystemMain implements ICustomDefine {
 		System.out.println("2.입금");
 		System.out.println("3.출금");
 		System.out.println("4.전체계좌정보출력");
-		System.out.println("5.프로그램종료");
+		System.out.println("5.계좌삭제");
+		System.out.println("6.프로그램종료");
 	}
 	
 	public static void main(String[] args) {
 
-		AccountManager handler = new AccountManager(50);
+		AccountManager handler = new AccountManager();
 		
 		while(true) {
-			showMenu();  
-			int choice = scan.nextInt();
+			try {
+				showMenu();
+				System.out.print("메뉴입력:");
+				int choice = scan.nextInt();
+				scan.nextLine();
+				switch(choice) {
+				case ICustomDefine.MAKE: 
+					handler.makeAccount();
+					break;
+				case ICustomDefine.DEPOSIT:
+					handler.depositMoney();
+					break;
+				case ICustomDefine.WITHDRAW:
+					handler.withdrawMoney();
+					break;
+				case ICustomDefine.INQUIRE:
+					handler.showAccInfo();
+					break;
+				case ICustomDefine.DELETE:
+				    handler.deleteAccount();
+				    break;
+				case ICustomDefine.EXIT:
+					System.out.println("프로그램종료");
+					return;
+				default :
+					System.out.println("숫자로 입력해주세요");
+					break;
+				}//switch
+			}//try
+			catch (InputMismatchException e) {
+			System.out.println("숫자만 입력할 수 있습니다.");
 			scan.nextLine();
-			switch(choice) {
-			case ICustomDefine.MAKE: 
-				handler.makeAccount();
-				break;
-			case ICustomDefine.DEPOSIT:
-				handler.depositMoney();
-				break;
-			case ICustomDefine.WITHDRAW:
-				handler.withdrawMoney();
-				break;
-			case ICustomDefine.INQUIRE:
-				handler.showAccInfo();
-				break;
-			case ICustomDefine.EXIT:
-				System.out.println("프로그램종료");
-				return;
-			default :
-				System.out.println("숫자로 입력해주세요");
-				break;
-			}
-		}
-	}
+			}//catch
+		}//while
+	}//main
+}//class
 
-}
