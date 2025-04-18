@@ -29,6 +29,13 @@ public class HighCreditAccount extends Account {
 	}
 
 	public int getInterest() {
-	    return super.getInterest(); // 부모의 이자율
+	    return interest; // 부모의 이자율
+	}
+	
+	@Override
+	public void deposit(int amount) {
+	    int basicInterest = amount * getInterest() / 100;
+	    int extra = amount * ExtraInterest() / 100;
+	    setBalance(getBalance() + amount + basicInterest + extra);
 	}
 }

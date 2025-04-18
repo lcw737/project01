@@ -16,4 +16,11 @@ public class NormalAccount extends Account {
 	public int getInterest() {
 	    return interest;
 	}
+	
+	@Override
+	public void deposit(int amount) {
+	    int interestAmount = amount * getInterest() / 100;
+	    setBalance(getBalance() + amount + interestAmount);
+	}
+
 }

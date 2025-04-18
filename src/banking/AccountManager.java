@@ -25,6 +25,7 @@ public class AccountManager implements Serializable {
 		System.out.println("***신규계좌개설***");
 		System.out.println("1. 보통계좌");
 		System.out.println("2. 신용신뢰계좌");
+		System.out.println("3. 특판계좌");
 		int kind = BankingSystemMain.scan.nextInt();
 		BankingSystemMain.scan.nextLine();
 
@@ -41,11 +42,14 @@ public class AccountManager implements Serializable {
 		Account Acc1 = null;
 		if (kind == 1) {
 			Acc1 = new NormalAccount(bname, bnum, balance, interest);
-		} else {
+		} else if (kind == 2){
 			System.out.print("신용등급: ");
 			char grade = BankingSystemMain.scan.nextLine().charAt(0);
 			Acc1 = new HighCreditAccount(bname, bnum, balance, interest, grade);
+		} else if (kind == 3) {
+			Acc1 = new SpecialAccount(bname, bnum, balance, interest);
 		}
+		
 
 		if (account.contains(Acc1)) {
 			System.out.println("중복계좌발견됨. 덮어쓸까요? (y or n)");
@@ -54,7 +58,7 @@ public class AccountManager implements Serializable {
 				account.remove(Acc1);
 				account.add(Acc1);
 				System.out.println("기존 계좌를 덮어썼습니다.");
-			} else {
+			} else  {
 				System.out.println("기존 계좌를 유지합니다.");
 			}
 		} else {
@@ -85,18 +89,7 @@ public class AccountManager implements Serializable {
 
 	        for (Account acc : account) {
 	            if (acc.getBnum().equals(bnum)) {
-	                int interest = 0;
-
-	                String type = acc.getAccountType();
-	                if (type.equals("신용계좌")) {
-	                    HighCreditAccount hca = (HighCreditAccount) acc;
-	                    interest = pMoney * hca.getInterest() / 100 + pMoney * hca.ExtraInterest() / 100;
-	                } else if (type.equals("보통계좌")) {
-	                    NormalAccount nc = (NormalAccount) acc;
-	                    interest = pMoney * nc.getInterest() / 100;
-	                }
-
-	                acc.setBalance(acc.getBalance() + pMoney + interest);
+	                acc.deposit(pMoney); 
 	                System.out.println("입금이 완료되었습니다.");
 	                return;
 	            }
@@ -108,7 +101,6 @@ public class AccountManager implements Serializable {
 	        BankingSystemMain.scan.nextLine();
 	    }
 	}
-
 
 	// 출금
 	public void withdrawMoney() {
