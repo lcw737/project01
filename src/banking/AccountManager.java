@@ -50,21 +50,35 @@ public class AccountManager implements Serializable {
 			Acc1 = new SpecialAccount(bname, bnum, balance, interest);
 		}
 		
+		boolean add1 = account.add(Acc1);
 
-		if (account.contains(Acc1)) {
-			System.out.println("중복계좌발견됨. 덮어쓸까요? (y or n)");
-			String ans = BankingSystemMain.scan.nextLine();
-			if (ans.equalsIgnoreCase("y")) {
-				account.remove(Acc1);
-				account.add(Acc1);
-				System.out.println("기존 계좌를 덮어썼습니다.");
-			} else  {
-				System.out.println("기존 계좌를 유지합니다.");
-			}
+		if (add1 == false) {
+		    System.out.println("중복계좌발견됨. 덮어쓸까요? (y or n)");
+		    if (BankingSystemMain.scan.nextLine().equalsIgnoreCase("y")) {
+		        account.remove(Acc1);
+		        account.add(Acc1);
+		        System.out.println("기존 계좌를 덮어썼습니다.");
+		    } else {
+		        System.out.println("기존 계좌를 유지합니다.");
+		    }
 		} else {
-			account.add(Acc1);
-			System.out.println("계좌개설 완료");
+		    System.out.println("계좌개설 완료");
 		}
+
+//		if (account.contains(Acc1)) {
+//			System.out.println("중복계좌발견됨. 덮어쓸까요? (y or n)");
+//			String ans = BankingSystemMain.scan.nextLine();
+//			if (ans.equalsIgnoreCase("y")) {
+//				account.remove(Acc1);
+//				account.add(Acc1);
+//				System.out.println("기존 계좌를 덮어썼습니다.");
+//			} else  {
+//				System.out.println("기존 계좌를 유지합니다.");
+//			}
+//		} else {
+//			account.add(Acc1);
+//			System.out.println("계좌개설 완료");
+//		}
 	}
 
 	// 입금
